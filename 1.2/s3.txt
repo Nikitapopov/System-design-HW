@@ -1,0 +1,1 @@
+Create buckets for photo, audio and video and use links to these files in database
