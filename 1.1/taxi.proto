@@ -1,0 +1,129 @@
+syntax = "proto3";
+
+package taxi;
+
+service Greeter {
+  rpc CalculateTripConditions (CalculateTripConditionsRequest) returns (CalculateTripConditionsReply) {}
+  rpc OrderTaxi (OrderTaxiRequest) returns (OrderTaxiReply) {}
+  rpc GetDriver (GetDriverRequest) returns (GetDriverReply) {}
+  rpc GetClient (GetClientRequest) returns (GetClientReply) {}
+  rpc GetWorkloadStatus (GetWorkloadStatusRequest) returns (GetWorkloadStatusReply) {}
+  rpc GetClientTripHistory (GetClientTripHistoryRequest) returns (GetClientTripHistoryReply) {}
+  rpc AddTripReview (AddTripReviewRequest) returns (AddTripReviewReply) {}
+  rpc UpdateUser (UpdateUserRequest) returns (Empty) {}
+}
+
+enum Tariff {
+  ECONOMY = 0;
+  COMFORT = 1;
+  COMFORT_PLUS = 2;
+  MINIVAN = 3;
+  THE_FASTEST = 4;
+}
+
+enum SortOrder {
+  ASC = 0;
+  DESC = 1;
+}
+
+message Empty {
+
+}
+
+message CalculateTripConditionsRequest {
+  repeated string stops = 1;
+  Tariff tariff = 2;
+}
+
+message TripCondition {
+  int32 trip_condition_id = 1;
+  int32 time = 2;
+  float price = 3;
+  repeated int32 route = 4;
+  Tariff tariff = 5;
+}
+
+message CalculateTripConditionsReply {
+  repeated TripCondition trip_conditions = 1;
+}
+
+message OrderTaxiRequest {
+  int32 trip_condition_id = 1;
+}
+
+message OrderTaxiReply {
+  string id = 1;
+}
+
+message GetDriverRequest {
+  int32 id = 1;
+}
+
+message GetDriverReply {
+  int32 id = 1;
+  string name = 2;
+  string photo = 3;
+  int32 rate = 4;
+}
+
+message GetClientRequest {
+  int32 id = 1;
+}
+
+message GetClientReply {
+  int32 id = 1;
+  string name = 2;
+  string photo = 3;
+  int32 rate = 4;
+}
+
+message GetWorkloadStatusRequest {
+  string area = 1;
+}
+
+message GetWorkloadStatusReply {
+  int32 traffic_level = 1;
+  float percentageOfAvailableDrivers = 2;
+}
+
+message GetClientTripHistoryRequest {
+  int32 id = 1;
+  optional string dateFrom = 2;
+  optional string dateTo = 3;
+  optional int32 offset = 4;
+  optional int32 limit = 5;
+  optional SortOrder sortOrder = 6;
+  repeated string sortBy = 7;
+}
+
+message ClientTrip {
+  int32 trip_id = 1;
+  int32 driver_id = 2;
+  repeated string stops = 3;
+  Tariff tariff = 4;
+  float price = 5;
+}
+
+message GetClientTripHistoryReply {
+  ClientTrip data = 1;
+  int32 page = 2;
+  int32 count = 3;
+  int32 total = 4;
+}
+
+message AddTripReviewRequest {
+  int32 trip_id = 1;
+  int32 rate = 2;
+  string comment = 3;
+}
+
+message AddTripReviewReply {
+  int32 trip_review_id = 1;
+}
+
+message UpdateUserRequest {
+  int32 id = 1;
+  string name = 2;
+  string photo = 3;
+  string phone = 4;
+}
