@@ -1,0 +1,7 @@
+Example of query to create friendship and subscription relationships:
+
+CREATE (john:User {name: 'John'})
+CREATE (joe:User {name: 'Joe'})
+CREATE (steve:User {name: 'Steve'})
+CREATE (john)-[:FRIENDS_WITH]->(joe)
+CREATE (john)-[:SUBSCRIBED]->(steve)
