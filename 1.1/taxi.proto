@@ -10,7 +10,7 @@ service Greeter {
   rpc GetWorkloadStatus (GetWorkloadStatusRequest) returns (GetWorkloadStatusReply) {}
   rpc GetClientTripHistory (GetClientTripHistoryRequest) returns (GetClientTripHistoryReply) {}
   rpc AddTripReview (AddTripReviewRequest) returns (AddTripReviewReply) {}
-  rpc UpdateUser (UpdateUserRequest) returns (Empty) {}
+  rpc UpdateUser (UpdateUserRequest) returns (google.protobuf.Empty) {}
 }
 
 enum Tariff {
@@ -26,21 +26,28 @@ enum SortOrder {
   DESC = 1;
 }
 
-message Empty {
-
+message Address {
+    int32 lat = 1;
+    int32 lon = 2;
+    string street = 3;
+    string building = 4;
 }
 
 message CalculateTripConditionsRequest {
-  repeated string stops = 1;
-  Tariff tariff = 2;
+  Address departurePlace = 1;
+  Address destinationPlace = 2;
+  repeated Address intermediateStops = 3;
+  Tariff tariff = 4;
 }
 
 message TripCondition {
   int32 trip_condition_id = 1;
   int32 time = 2;
   float price = 3;
-  repeated int32 route = 4;
-  Tariff tariff = 5;
+  Address departurePlace = 4;
+  Address destinationPlace = 5;
+  repeated Address intermediateStops = 6;
+  Tariff tariff = 7;
 }
 
 message CalculateTripConditionsReply {
@@ -99,9 +106,11 @@ message GetClientTripHistoryRequest {
 message ClientTrip {
   int32 trip_id = 1;
   int32 driver_id = 2;
-  repeated string stops = 3;
-  Tariff tariff = 4;
-  float price = 5;
+  Address departurePlace = 3;
+  Address destinationPlace = 4;
+  repeated Address intermediateStops = 5;
+  Tariff tariff = 6;
+  float price = 7;
 }
 
 message GetClientTripHistoryReply {

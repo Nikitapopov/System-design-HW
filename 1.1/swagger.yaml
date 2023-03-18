@@ -87,7 +87,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Client'
-  /drivers/workload-status:
+  /drivers/workload_status:
     get:
       tags:
         - taxi
@@ -229,21 +229,22 @@ components:
   schemas:
     TripRequirements:
       type: object
-      required: [stops, tariff]
+      required: [departurePlace, destinationPlace, tariff]
       properties:
-        stops:
+        departurePlace:
+          $ref: '#/components/schemas/Address'
+        destinationPlace:
+          $ref: '#/components/schemas/Address'
+        intermediateStops:
           type: array
-          description: Start, intermediate stops and finish spot
           items:
-            type: string
-            minLength: 2
-            maxLength: 10
+            $ref: '#/components/schemas/Address'
         tariff:
           type: number
           enum: [0,1,2,3,4]
     TripCondition:
       type: object
-      required: [trip_condition_id, time, price, route, tariff]
+      required: [trip_condition_id, time, price, departurePlace, destinationPlace, tariff]
       properties:
         # Price is reserved, so  maybe it is necessary to keep it some time
         trip_condition_id:
@@ -255,11 +256,14 @@ components:
         price:
           type: number
           description: Price in rubles
-        route:
+        departurePlace:
+          $ref: '#/components/schemas/Address'
+        destinationPlace:
+          $ref: '#/components/schemas/Address'
+        intermediateStops:
           type: array
-          description: Route by one-dimensional coordinates
           items:
-            type: number
+            $ref: '#/components/schemas/Address'
         tariff:
           type: number
           enum: [0,1,2,3,4]
@@ -323,10 +327,14 @@ components:
           type: integer
         driver_id:
           type: integer
-        stops:
+        departure_place:
+          $ref: '#/components/schemas/Address'
+        destination_place:
+          $ref: '#/components/schemas/Address'
+        intermediate_stops:
           type: array
           items:
-            type: string
+            $ref: '#/components/schemas/Address'
         tariff:
           type: integer
           enum: [0,1,2,3,4]
@@ -350,5 +358,17 @@ components:
           type: string
           description: URL to photo
         phone:
+          type: string
+    Address:
+      type: object
+      required: [lat, lon, street, building]
+      properties:
+        lat:
+          type: integer
+        lon:
+          type: integer
+        street:
+          type: string
+        building:
           type: string
   
