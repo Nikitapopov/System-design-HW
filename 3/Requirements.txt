@@ -1,0 +1,54 @@
+FR – Functional requirements
+NR – Non-functional requirements
+
+Posts FR:
+1.	Posts display in reverse order.
+2.	Support for comments and likes in posts
+3.	View posts comments, likes and views
+4.	Support for text and media in posts
+5.	Posts adding/editing
+6.	Posts notifications
+7.	Reposts
+Posts NR:
+•	Number of posts in pagination – 10
+•	Average number of post readings - 10/day
+•	Average number of post writings - 1/week
+•	RT to write a post - 3 sec
+•	RT to read a feed (first page of pagination) - 2 sec
+•	RT to update a feed (any page of pagination except first) - 2 sec
+•	No limits to number of comments
+•	Size of comment is 5000 symbols
+•	Post can include up to 10 images (up to 1 Mb) and up to 10 media files (up to 1 Mb)
+Chats FR:
+1.	Limit in chat is up to 1000 members
+2.	Message adding/editing/deletion
+3.	Mentions of other users
+4.	Notifications about new messages
+5.	Size of message is 5000 symbols
+6.	Post can include up to 10 images (up to 1 Mb) and up to 10 media files (up to 1 Mb)
+7.	Messages statuses
+8.	Chat’s avatar
+Chats NR:
+•	Number of messages to return 30
+•	Average number of messages readings - 30/day
+•	Average number of messages writings - 10/day
+•	RT to write a message - 1 sec
+•	RT to read 30 messages - 1 sec
+User FR:
+1.	Personal information in descriptions, city and interests
+2.	User profile contains photos with one avatar with timestamp
+3.	User photos maintain comments and likes
+4.	Profile display user’s posts
+5.	Profile display user’s friend list
+6.	Request friendship (subscription)
+User NR:
+•	Average friends number is 100 
+•	No limit to number of friends
+•	RT to read user profile – 1 sec
+•	RT to write user profile – 2 sec
+General NR:
+•	DAU - 50 million
+•	MAU - 80 million
+•	HA 99.95%
+•	Cross device synchronization
+•	Retention - 5 years
